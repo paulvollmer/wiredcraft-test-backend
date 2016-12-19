@@ -51,31 +51,31 @@ func Test_Database_ReadUser(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	t.Log(tmpUserRead)
-	// if *tmpUserRead.Name != "Test-Name" {
-	// 	t.Error("ReadUser Name not equal. must be 'Test Name'")
-	// }
-	// if tmpUserRead.Description != "Test Description" {
-	// 	t.Error("ReadUser Description not equal. must be 'Test Description'")
-	// }
-	// if tmpUserRead.Address.City != "Test-City" {
-	// 	t.Error("ReadUser Address City not equal. must be 'Test-City'")
-	// }
-	// if tmpUserRead.Address.Country != "DE" {
-	// 	t.Error("ReadUser Address Country not equal. must be 'DE'\n")
-	// }
-	// if tmpUserRead.Address.State != "Test-State" {
-	// 	t.Error("ReadUser Address State not equal. must be 'Test-State'")
-	// }
-	// if tmpUserRead.Address.Street != "Test-Street" {
-	// 	t.Error("ReadUser Address Street not equal. must be 'Test-Street'")
-	// }
-	// if tmpUserRead.Address.Streetnumber != "Test-Number" {
-	// 	t.Error("ReadUser Address Streetnumber not equal. must be 'Test-Number'")
-	// }
-	// if tmpUserRead.Address.Zip != "Test-Zip" {
-	// 	t.Error("ReadUser Address Zip not equal. must be 'Test-Zip'")
-	// }
+	// t.Log(tmpUserRead)
+	if tmpUserRead.Name != "Test-Name" {
+		t.Error("ReadUser Name not equal. must be 'Test Name'")
+	}
+	if tmpUserRead.Description != "Test Description" {
+		t.Error("ReadUser Description not equal. must be 'Test Description'")
+	}
+	if tmpUserRead.Address.City != "Test-City" {
+		t.Error("ReadUser Address City not equal. must be 'Test-City'")
+	}
+	if tmpUserRead.Address.Country != "DE" {
+		t.Error("ReadUser Address Country not equal. must be 'DE'\n")
+	}
+	if tmpUserRead.Address.State != "Test-State" {
+		t.Error("ReadUser Address State not equal. must be 'Test-State'")
+	}
+	if tmpUserRead.Address.Street != "Test-Street" {
+		t.Error("ReadUser Address Street not equal. must be 'Test-Street'")
+	}
+	if tmpUserRead.Address.Streetnumber != "Test-Streetnumber" {
+		t.Error("ReadUser Address Streetnumber not equal. must be 'Test-Streetnumber'")
+	}
+	if tmpUserRead.Address.Zip != "Test-Zip" {
+		t.Error("ReadUser Address Zip not equal. must be 'Test-Zip'")
+	}
 }
 
 func Test_Database_UpdateUser(t *testing.T) {

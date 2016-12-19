@@ -95,7 +95,7 @@
 						}
 					],
 					"request": {
-						"url": "http://localhost:8000/user/1",
+						"url": "http://localhost:8000/user/0",
 						"method": "GET",
 						"header": [
 							{
@@ -137,7 +137,7 @@
 						}
 					],
 					"request": {
-						"url": "http://localhost:8000/user/1",
+						"url": "http://localhost:8000/user/0",
 						"method": "PUT",
 						"header": [
 							{
@@ -175,7 +175,7 @@
 						}
 					],
 					"request": {
-						"url": "http://localhost:8000/user/1",
+						"url": "http://localhost:8000/user/0",
 						"method": "DELETE",
 						"header": [
 							{

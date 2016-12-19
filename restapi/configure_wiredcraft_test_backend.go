@@ -50,7 +50,7 @@ func configureAPI(api *operations.WiredcraftTestBackendAPI) http.Handler {
 		fmt.Println("Database Error", err)
 		os.Exit(127)
 	}
-	fmt.Printf("Database initialize %q\n", dbFile)
+	fmt.Printf("Database initialized %q\n", dbFile)
 
 	api.JSONConsumer = runtime.JSONConsumer()
 	api.JSONProducer = runtime.JSONProducer()
@@ -63,6 +63,7 @@ func configureAPI(api *operations.WiredcraftTestBackendAPI) http.Handler {
 		}
 		return nil, errors.New(401, "incorrect api key auth")
 	}
+	fmt.Printf("Token handler initialized\n")
 
 	api.UserUserIDDeleteHandler = user.UserIDDeleteHandlerFunc(func(params user.UserIDDeleteParams, principal interface{}) middleware.Responder {
 		err := db.DeleteUser(params.Userid)
