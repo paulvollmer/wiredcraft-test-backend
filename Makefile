@@ -23,7 +23,8 @@ test:
 	@rm -f restapi/*.db
 
 test-api:
-	newman run postman.json
+	./cmd/wiredcraft-test-backend-server/wiredcraft-test-backend-server --port 8000 & FUZZ_PID=$! && sleep 2 && newman run postman.json && kill -9 ${FUZZ_PID}
+
 
 serve:
 	./cmd/wiredcraft-test-backend-server/wiredcraft-test-backend-server --port 8000

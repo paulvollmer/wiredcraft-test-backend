@@ -1,6 +1,8 @@
-language: go
+language: go node_js
 go:
   - 1.7
+node_js:
+  - 6
 
 install:
   - go get -u github.com/go-swagger/go-swagger/cmd/swagger
@@ -15,5 +17,6 @@ script:
   - make gen
   - make install
   - make build
+  - ./cmd/wiredcraft-test-backend-server/wiredcraft-test-backend-server --help
   - make test
-  - make serve & FUZZ_PID=$! && make test-api && kill -9 $FUZZ_PID
+  - make test-api
