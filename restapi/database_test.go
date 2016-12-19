@@ -25,7 +25,7 @@ func Test_NewDatabase(t *testing.T) {
 func Test_Database_CreateUser(t *testing.T) {
 	testUser := models.ModelUser{}
 	testUserName := "Test-Name"
-	testUser.Name = &testUserName
+	testUser.Name = testUserName
 	testUser.Description = "Test Description"
 	testUser.Address = &models.ModelAddress{
 		City:         "Test-City",
@@ -40,7 +40,7 @@ func Test_Database_CreateUser(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if *tmpUserCreate.Name != testUserName {
+	if tmpUserCreate.Name != testUserName {
 		t.Errorf("CreateUser Name not equal. must be %q\n", testUserName)
 	}
 	// t.Log(tmpUserCreate)
@@ -81,7 +81,7 @@ func Test_Database_ReadUser(t *testing.T) {
 func Test_Database_UpdateUser(t *testing.T) {
 	newName := "New-Name"
 	newUserData := models.ModelUser{
-		Name:        &newName,
+		Name:        newName,
 		Description: "New Description",
 		Address: &models.ModelAddress{
 			City:         "New-City",
@@ -95,8 +95,8 @@ func Test_Database_UpdateUser(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if *tmpUserUpdate.Name != "New-Name" {
-		t.Errorf("UpdateUser Name not equal (%q). must be %q\n", *tmpUserUpdate.Name, newName)
+	if tmpUserUpdate.Name != "New-Name" {
+		t.Errorf("UpdateUser Name not equal (%q). must be %q\n", tmpUserUpdate.Name, newName)
 	}
 	if tmpUserUpdate.Description != "New Description" {
 		t.Errorf("UpdateUser Description not equal. must be 'New Description'\n")
