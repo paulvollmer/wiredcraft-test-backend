@@ -10,5 +10,10 @@ install:
   - go get github.com/go-openapi/errors
   - npm install newman --global
 
+# split the tests for better time measure and fold output at the travis ui
 script:
-  - make
+  - make gen
+  - make install
+  - make build
+  - make test
+  - make serve & FUZZ_PID=$! && make test-api && kill -9 $FUZZ_PID
