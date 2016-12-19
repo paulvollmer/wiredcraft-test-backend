@@ -1,4 +1,4 @@
-# Wiredcraft Back-end Developer Coding Test
+# wiredcraft-test-backend [![Build Status](https://travis-ci.org/paulvollmer/wiredcraft-test-backend.svg?branch=master)](https://travis-ci.org/paulvollmer/wiredcraft-test-backend)
 
 ## Background
 
