@@ -1,0 +1,10 @@
+language: go
+go:
+  - 1.7
+
+install:
+  - go get -u github.com/go-swagger/go-swagger/cmd/swagger
+  - npm install newman --global
+
+script:
+  - make

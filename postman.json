@@ -1,0 +1,203 @@
+{
+	"variables": [],
+	"info": {
+		"name": "wiredcraft test backend",
+		"_postman_id": "903a231a-a1bf-8b02-872f-667a8554f756",
+		"description": "the wiredcraft code challenge solution",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"description": "Folder for user",
+			"item": [
+				{
+					"name": "/user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");",
+									"tests[\"Access-Control-Allow-Origin is present\"] = postman.getResponseHeader(\"Access-Control-Allow-Origin\");",
+									"tests[\"Server is present\"] = postman.getResponseHeader(\"Server\");",
+									"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;",
+									"",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests['Data Name']                 = jsonData.name                 === 'test-name';",
+									"tests['Data Description']          = jsonData.description          === 'test description';",
+									"tests['Data Dob']                  = jsonData.dob                  === '2016-12-19';",
+									"tests['Data Address City']         = jsonData.address.city         === 'test-city';",
+									"tests['Data Address Country']      = jsonData.address.country      === 'DE';",
+									"tests['Data Address Street']       = jsonData.address.street       === 'test-street';",
+									"tests['Data Address Streetnumber'] = jsonData.address.streetnumber === '1337';",
+									"tests['Data Address Details']      = jsonData.address.details      === 'room 404';",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8000/user",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Conten",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-token",
+								"value": "secret",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"test-name\",\n  \"description\": \"test description\",\n  \"dob\": \"2016-12-19\",\n  \"address\": {\n  \t\"city\": \"test-city\",\n  \t\"country\": \"DE\",\n  \t\"street\": \"test-street\",\n  \t\"streetnumber\": \"1337\",\n  \t\"details\": \"room 404\"\n  }\n}"
+						},
+						"description": "Create a new User"
+					},
+					"response": []
+				},
+				{
+					"name": "/user/{userid}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");",
+									"tests[\"Access-Control-Allow-Origin is present\"] = postman.getResponseHeader(\"Access-Control-Allow-Origin\");",
+									"tests[\"Server is present\"] = postman.getResponseHeader(\"Server\");",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests['Data Name']                 = jsonData.name                 === 'test-name';",
+									"tests['Data Description']          = jsonData.description          === 'test description';",
+									"tests['Data Dob']                  = jsonData.dob                  === '2016-12-19';",
+									"tests['Data Address City']         = jsonData.address.city         === 'test-city';",
+									"tests['Data Address Country']      = jsonData.address.country      === 'DE';",
+									"tests['Data Address Street']       = jsonData.address.street       === 'test-street';",
+									"tests['Data Address Streetnumber'] = jsonData.address.streetnumber === '1337';",
+									"tests['Data Address Details']      = jsonData.address.details      === 'room 404';",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8000/user/0",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-token",
+								"value": "secret",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Get an User by its ID."
+					},
+					"response": []
+				},
+				{
+					"name": "/user/{userid}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");",
+									"tests[\"Access-Control-Allow-Origin is present\"] = postman.getResponseHeader(\"Access-Control-Allow-Origin\");",
+									"tests[\"Server is present\"] = postman.getResponseHeader(\"Server\");",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"description\"] = jsonData.description === \"foo\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8000/user/0",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-token",
+								"value": "secret",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"foo\"\n}"
+						},
+						"description": "Update the Data of an User by its ID."
+					},
+					"response": []
+				},
+				{
+					"name": "/user/{userid}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");",
+									"tests[\"Access-Control-Allow-Origin is present\"] = postman.getResponseHeader(\"Access-Control-Allow-Origin\");",
+									"tests[\"Server is present\"] = postman.getResponseHeader(\"Server\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8000/user/0",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-token",
+								"value": "secret",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Delete an User by its ID."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
