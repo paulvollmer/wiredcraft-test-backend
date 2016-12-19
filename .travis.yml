@@ -4,6 +4,10 @@ go:
 
 install:
   - go get -u github.com/go-swagger/go-swagger/cmd/swagger
+  - swagger version
+  - go get github.com/go-openapi/strfmt
+  - go get github.com/go-openapi/runtime
+  - go get github.com/go-openapi/errors
   - npm install newman --global
 
 script:
