@@ -1,0 +1,227 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: wiredcraft test backend
+  description: the wiredcraft code challenge solution
+  contact:
+    name: Paul Vollmer
+    url: https://github.com/paulvollmer
+    email: paul.vollmer@protonmail.com
+host: localhost:8000
+basePath: /
+schemes:
+  - http
+  #- https
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  # simple header authentication token
+  key:
+    type: apiKey
+    in: header
+    name: x-token
+  # an oauth security layer is the solution we prefer for an in production server
+  #
+security:
+  - key: []
+
+paths:
+
+  '/user':
+    post:
+      tags: ['user']
+      operationId: User_Post
+      summary: Get a user by its ID
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModelUser'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/ModelUser'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ModelError'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ModelError'
+
+  '/user/{userid}':
+    get:
+      tags: ['user']
+      operationId: User_ID_Get
+      summary: Get an User by its ID.
+      parameters:
+        - name: userid
+          in: path
+          type: integer
+          format: uint64
+          required: true
+          description: ID of the User
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelUser'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ModelError'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ModelError'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ModelError'
+    put:
+      tags: ['user']
+      operationId: User_ID_Put
+      summary: Update the Data of an User by its ID.
+      parameters:
+        - name: userid
+          in: path
+          type: integer
+          format: uint64
+          required: true
+          description: ID of the User
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModelUser'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelUser'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ModelError'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ModelError'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ModelError'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ModelError'
+    delete:
+      tags: ['user']
+      operationId: User_ID_Delete
+      summary: Delete an User by its ID.
+      parameters:
+        - name: userid
+          in: path
+          type: integer
+          format: uint64
+          required: true
+          description: ID of the User
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: boolean
+                description: set to true if the user was successful deleted
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ModelError'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ModelError'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ModelError'
+
+definitions:
+
+  ModelError:
+    description: The basic error object
+    type: object
+    required:
+      - statuscode
+      - status
+    properties:
+      statuscode:
+        description: the statuscode as integer
+        type: integer
+      status:
+        description: the statuscode as uman readable text
+        type: string
+
+  ModelUser:
+    description: the user data model
+    type: object
+    properties:
+      id:
+        description: User ID (you can use uuid or the id provided by database, but need to be unique)
+        type: integer
+        format: uint64
+        readOnly: true
+      created_at:
+        description: user created date
+        type: string
+        format: date-time
+        readOnly: true
+      name:
+        description: user name
+        type: string
+        minLength: 2
+        maxLength: 80
+      dob:
+        description: date of birth
+        type: string
+        format: date
+      address:
+        $ref: '#/definitions/ModelAddress'
+      description:
+        description: user description
+        type: string
+
+  ModelAddress:
+    description: Address data of an User
+    type: object
+    properties:
+      street:
+        description: The Street
+        type: string
+      streetnumber:
+        description: The Streetnumber
+        type: string
+      city:
+        description: The City
+        type: string
+      state:
+        description: The State
+        type: string
+      zip:
+        description: The Zip Code
+        type: string
+      country:
+        description: The Country set as ISO 3166-2
+        minLength: 2
+        maxLength: 2
+        type: string
+      details:
+        description: Additional information about the location
+        type: string

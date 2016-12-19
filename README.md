@@ -1,70 +1,44 @@
 # Wiredcraft Back-end Developer Coding Test
 
-Make sure you read **all** of this document carefully, and follow the guidelines in it.
-
 ## Background
 
-Build a restful api that could `get/create/update/delete` user data from a persistence database
+Build a restful api that could `CRUD (create, read, update, delete)` user data from a persistence database.
 
-### User Model
+## Architecture
 
+The Restful API is specified in an openAPI aka swagger format.  
+The server is build on top of `go-swagger` and `boltDB` (Embedded Database) to store the Data.
+
+
+## How to run the code
+*Requirements*
+- golang to compile the final API server
+- nodejs (for API tests with newman, the [postman](https://www.getpostman.com/) cli tool)
+
+Clone the Repository and simple run
 ```
-{
-  "id": "xxx",                  // user id(you can use uuid or the id provided by database, but need to be unique)
-  "name": "test",               // user name
-  "dob": "",                    // date of birth
-  "address": "",                // user address
-  "description": "",            // user description
-  "created_at": ""              // user created date
-}
+cd $GOPATH/src/github.com/paulvollmer
+git clone https://github.com/paulvollmer/wiredcraft-test-backend
+cd wiredcraft-test-backend
+
+# The make Task generate and build the server
+make
 ```
 
-### API
+## API Documentation
+The API Docs can be found at the `http://localhost:8000/docs`
 
+## Unit Test
+There are two kind of tests.
+- Database tests
 ```
-GET    /user/{id}                   - Get user by ID
-POST   /user/                       - To create a new user
-PUT    /user/{id}                   - To update an existing user with data
-DELETE /user/{id}                   - To delete a user from database
+make test
 ```
-
-## Getting started
-
-There's nothing here, we leave it to you to choose the build tool, code structure, framework, testing approach...
-
-## Requirements
-
-- With clear documentation on how to run the code and api usage
-
-- Proper use of RESTFUL api design pattern
-
-- Provide proper unit test
-
-- Choose either sql or no-sql database to make the data persistence
-
-- Use git to manage code
-
-
-## What We Care About
-
-Feel free to use any libraries you would use if this were a real production app, but remember we're interested in your code & the way you solve the problem, not how well you can use a particular library.
-
-We're interested in your method and how you approach the problem just as much as we're interested in the end result.
-
-Here's what you should aim for:
-
-- Good use of current restful api design & performance best practices.
-
-- Solid testing approach
-
-- Extensible code;
-
-## Q&A
-
-* Where should I send back the result when I'm done?
-
-Fork this repo and send us a pull request when you think you are done. We don't have deadline for the task.
-
-* What if I have question?
-
-Create a new issue in the repo and we will get back to you very quickly.
+- Server tests
+```
+# This test requires a running server to send the test requests
+# start running a server...
+make serve
+# execute the test collection
+make test-api
+```
