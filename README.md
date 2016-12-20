@@ -13,7 +13,8 @@ The server is build on top of `go-swagger` and `boltDB` (Embedded Database) to s
 ## How to run the code
 *Requirements*
 - golang to compile the final API server
-- nodejs (for API tests with newman, the [postman](https://www.getpostman.com/) cli tool)
+- go-swagger tool (run `go get -u github.com/go-swagger/go-swagger/cmd/swagger`)
+- nodejs (for API tests with newman, the [postman](https://www.getpostman.com/) can be installed by running `npm install newman --global`)
 
 Clone the Repository and simple run
 ```
